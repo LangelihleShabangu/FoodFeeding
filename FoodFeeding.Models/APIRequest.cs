@@ -1,0 +1,16 @@
+﻿using FoodFeeding.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static FoodFeeding.Utilities.SD;
+
+namespace FoodFeeding.Models
+{
+    public class APIRequest
+    {        
+        public string Url { get; set; }        
+        public object Data { get; set; }
+    }
+}
