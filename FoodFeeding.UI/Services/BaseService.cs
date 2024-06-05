@@ -4,6 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 
+         /* 
+			Name : Langelihle Shabangu 
+			Date : 05 June 2024
+			Desciption
+			This is the call that makes a GET to the API in order to pull the data required.
+            Also added the try catch method to make sure we returning a proper error messages to the user.
+		 */
+
 namespace FoodFeeding.UI.Services
 {
     public class BaseService : IBaseServices
@@ -19,7 +27,9 @@ namespace FoodFeeding.UI.Services
         {
             try
             {
-                var client = httpClient.CreateClient("IngredientItemsClient");
+				/* Preparation to make a call to the API */
+
+				var client = httpClient.CreateClient("IngredientItemsClient");
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
                 message.RequestUri = new Uri(apiRequest.Url);
@@ -29,8 +39,9 @@ namespace FoodFeeding.UI.Services
                     message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8, "application/json");
                 }
                 message.Method = HttpMethod.Get;
-                HttpResponseMessage apiResponse = null;                
-                apiResponse = await client.SendAsync(message);
+                HttpResponseMessage apiResponse = null;    
+                
+                apiResponse = await client.SendAsync(message); /* Calling the API */
 
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
                 try

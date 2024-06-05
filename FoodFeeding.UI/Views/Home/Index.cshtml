@@ -1,8 +1,65 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "_Layout_15";
+    var @currentHeading = string.Empty;
 }
+@using Microsoft.AspNetCore.Components
+@model IEnumerable<FoodFeeding.Models.ModelView.ModelView>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!--begin::Row-->
+<div class="row g-5 g-xl-8">
+    <!--begin::Col-->
+    @foreach (var item in Model.OrderByDescending(f => f.Feeds))
+    {
+        <div class="col-xl-4">
+            <!--begin::Mixed Widget 12-->
+            <div class="card card-xl-stretch mb-xl-8">
+                <!--begin::Header-->
+                <div class="card-header border-0 bg-danger py-5">
+                    <h3 class="card-title fw-bold text-white">@item.Reciept_Name  Feed : @item.Feeds</h3>                   
+                </div>
+
+                <div style="height:15px" ></div>
+
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <!--begin::Chart-->                    
+                    <!--end::Chart-->
+                    <!--begin::Stats-->
+                    <div class="card-rounded bg-body mt-n10 position-relative card-px py-15">
+                        <!--begin::Row-->
+                        <div class="row g-0 mb-7">
+                            @foreach (var information in item.ModelViewList)
+                            {
+                                <div class="d-flex align-items-center bg-light-success rounded p-5 mb-7">
+                                    <i class="ki-duotone ki-abstract-26 text-success fs-1 me-5">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                    <!--begin::Title-->
+                                    <div class="flex-grow-1 me-2">
+                                        <a href="#" class="fw-bold text-gray-800 text-hover-primary fs-6">@information.Food_Name</a>
+                                        <span class="text-muted fw-semibold d-block">@item.Reciept_Name </span>
+                                    </div>
+                                    <!--end::Title-->
+                                    <!--begin::Lable-->
+                                    <span class="fw-bold text-success py-1">@information.Quantity</span>
+                                    <!--end::Lable-->
+                                </div>
+
+                                <!--begin::Col-->                               
+                            }
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Stats-->
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Mixed Widget 12-->
+            </div>
+        </div>
+    }
 </div>
+<!--end::Row-->
+<div class="bgi-no-repeat bgi-size-cover rounded min-h-250px mb-5" style="background-image:url('images/home/slide1.jpg');"></div>
+

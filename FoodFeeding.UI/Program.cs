@@ -1,7 +1,17 @@
+using FoodFeeding.UI.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IIngredientItemsService, IngredientItemsService>();
+
+builder.Services.AddScoped<IIngredientItemsService, IngredientItemsService>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 
@@ -18,7 +28,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
